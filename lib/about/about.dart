@@ -8,7 +8,7 @@ class AboutScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Hi',
+          'About',
           // Apply a custom theme, accessing from the parent widget
           style: Theme.of(context).textTheme.button,
         ),
