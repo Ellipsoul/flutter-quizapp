@@ -1,8 +1,10 @@
-import 'package:flutter/material.dart';
-
 // Import the firebase_core plugin
 import 'package:firebase_core/firebase_core.dart';
 
+import 'package:flutter/material.dart';
+import 'package:quizapp/routes.dart';
+
+// This is called to run the application
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const App());
@@ -42,19 +44,9 @@ class _AppState extends State<App> {
 
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
+          // Once routes are added here, don't add anything else to this main file
           return MaterialApp(
-            home: Scaffold(
-              appBar: AppBar(),
-              drawer: const Drawer(),
-              bottomNavigationBar: BottomNavigationBar(
-                items: const [
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.ac_unit), label: 'Hi'),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.ac_unit), label: 'Hi'),
-                ],
-              ),
-            ),
+            routes: appRoutes, // Import the routes into the base app
           );
         }
 
