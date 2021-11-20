@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // Customise app theme here!
 var appTheme = ThemeData(
+  // Apply a custom font from imported Google fonts
+  fontFamily: GoogleFonts.nunito().fontFamily,
   // Sets the bottom bar to a darkish mode
   bottomAppBarTheme: const BottomAppBarTheme(
     color: Colors.black87,
