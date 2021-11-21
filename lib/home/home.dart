@@ -12,6 +12,7 @@ class HomeScreen extends StatelessWidget {
     // Display the correct UI depending on the user's login state
     // User a streambuilder to render different components conditionally
     return StreamBuilder(
+      stream: AuthService().userStream,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
