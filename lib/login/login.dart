@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import 'package:quizapp/services/auth.dart';
 
@@ -19,6 +20,16 @@ class LoginScreen extends StatelessWidget {
             const FlutterLogo(
               size: 150,
             ),
+            // Google login
+            Flexible(
+              child: LoginButton(
+                icon: FontAwesomeIcons.google,
+                text: 'Sign In with Google',
+                loginMethod: AuthService().googleLogin,
+                color: Colors.blue,
+              ),
+            ),
+            // Anonymous login
             Flexible(
               child: LoginButton(
                 icon: FontAwesomeIcons.userNinja,
@@ -26,7 +37,22 @@ class LoginScreen extends StatelessWidget {
                 loginMethod: AuthService().anonLogin,
                 color: Colors.deepPurple,
               ),
-            )
+            ),
+            // // Apple login (not in use)
+            // FutureBuilder<Object>(
+            //   future: SignInWithApple.isAvailable(),
+            //   builder: (context, snapshot) {
+            //     if (snapshot.data == true) {
+            //       return SignInWithAppleButton(
+            //         onPressed: () {
+            //           AuthService().signInWithApple();
+            //         },
+            //       );
+            //     } else {
+            //       return Container();
+            //     }
+            //   },
+            // ),
           ],
         ),
       ),
