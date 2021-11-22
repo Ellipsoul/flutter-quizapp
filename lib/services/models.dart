@@ -10,7 +10,11 @@ class Option {
   String value;
   String detail;
   bool correct;
-  Option({this.value = '', this.detail = '', this.correct = false});
+  Option({
+    this.value = '',
+    this.detail = '',
+    this.correct = false,
+  });
   // Define this factory constructor that tells JsonSerialisable what to do
   factory Option.fromJson(Map<String, dynamic> json) => _$OptionFromJson(json);
   // Define a toJson method for each class to be called
@@ -22,7 +26,10 @@ class Option {
 class Question {
   String text;
   List<Option> options;
-  Question({this.options = const [], this.text = ''});
+  Question({
+    this.options = const [],
+    this.text = '',
+  });
   factory Question.fromJson(Map<String, dynamic> json) =>
       _$QuestionFromJson(json);
   Map<String, dynamic> toJson() => _$QuestionToJson(this);
@@ -37,31 +44,36 @@ class Quiz {
   String topic;
   List<Question> questions;
 
-  Quiz(
-      {this.title = '',
-      this.video = '',
-      this.description = '',
-      this.id = '',
-      this.topic = '',
-      this.questions = const []});
+  Quiz({
+    this.title = '',
+    this.video = '',
+    this.description = '',
+    this.id = '',
+    this.topic = '',
+    this.questions = const [],
+  });
   factory Quiz.fromJson(Map<String, dynamic> json) => _$QuizFromJson(json);
   Map<String, dynamic> toJson() => _$QuizToJson(this);
 }
 
+@JsonSerializable()
 class Topic {
-  final String id;
+  late final String id;
   final String title;
-  final String descripton;
+  final String description;
   final String img;
   final List<Quiz> quizzes;
 
-  // Always a good idea to have default values to work with null safety
-  Topic(
-      {this.id = 'default-id',
-      this.title = 'Default Title',
-      this.descripton = 'Default description',
-      this.img = 'default.png',
-      this.quizzes = const []});
+  Topic({
+    this.id = '',
+    this.title = '',
+    this.description = '',
+    this.img = 'default.png',
+    this.quizzes = const [],
+  });
+
+  factory Topic.fromJson(Map<String, dynamic> json) => _$TopicFromJson(json);
+  Map<String, dynamic> toJson() => _$TopicToJson(this);
 }
 
 @JsonSerializable()
@@ -70,7 +82,11 @@ class Report {
   int total;
   Map<String, dynamic> topics;
 
-  Report({this.uid = '', this.topics = const {}, this.total = 0});
+  Report({
+    this.uid = '',
+    this.topics = const {},
+    this.total = 0,
+  });
   factory Report.fromJson(Map<String, dynamic> json) => _$ReportFromJson(json);
   Map<String, dynamic> toJson() => _$ReportToJson(this);
 }
