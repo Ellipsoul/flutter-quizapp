@@ -28,6 +28,9 @@
 
   <title>quizapp</title>
   <link rel="manifest" href="manifest.json">
+
+  <!-- Required for Google Sign In on web-->
+  <meta name="google-signin-client_id" content="985697121682-a22bscqnf1lnm4b8ch1bfmlgn589g79t.apps.googleusercontent.com">
 </head>
 <body>
   <!-- This script installs service_worker.js to provide PWA functionality to
@@ -96,6 +99,24 @@
       // Service workers not supported. Just drop the <script> tag.
       loadMainDartJs();
     }
+  </script>
+  <!-- Initialise Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyAKIDYLgm48CA0_x9mxvJ-1M9AfziCdK8I",
+      authDomain: "flutter-quizapp-5e713.firebaseapp.com",
+      projectId: "flutter-quizapp-5e713",
+      storageBucket: "flutter-quizapp-5e713.appspot.com",
+      messagingSenderId: "985697121682",
+      appId: "1:985697121682:web:bdd0f45a7db2d4a839fd4b",
+      measurementId: "G-CNFLZX5H4N"
+    };
+
+    firebase.initializeApp(firebaseConfig);
   </script>
 </body>
 </html>
