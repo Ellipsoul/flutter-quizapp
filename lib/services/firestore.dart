@@ -26,4 +26,37 @@ class FirestoreService {
     var snapshot = await ref.get();
     return Quiz.fromJson(snapshot.data() ?? {});
   }
+
+  // Listen to user's report document in Firestore
+  Stream<Report> streamReport() {
+    // The user authentication state may change, so it's a stream
+    // But the user's report is also a stream, updating as they complete quizzes
+    return AuthService().userStream.switchMap((user) {
+      // Rxdart allows for switching between streams (switchMap)
+      if (user != null) {
+        // Listen to the report document in real time
+        var ref = _db.collection('reports').doc(user.uid);
+        return ref.snapshots().map((doc) => Report.fromJson(doc.data()!));
+      } else {
+        return Stream.fromIterable([Report()]);
+      }
+    });
+  }
+
+  // Update user report when they complete a quiz
+  Future<void> updateUserReport(Quiz quiz) {
+    var user = AuthService().user!; // Assert that user is always defined
+    var ref = _db.collection('reports').doc(user.uid);
+
+    // Firestore database uses string keys and dynamic values
+    var data = {
+      'total': FieldValue.increment(1),
+      'topics': {
+        quiz.topic: FieldValue.arrayUnion([quiz.id]) // Merge to existing array
+      }
+    };
+
+    // Write to firestore, allowing for merging instead of overwriting
+    return ref.set(data, SetOptions(merge: true));
+  }
 }
