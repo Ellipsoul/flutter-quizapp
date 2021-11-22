@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:quizapp/about/about.dart';
 import 'package:quizapp/profile/profile.dart';
 import 'package:quizapp/login/login.dart';

@@ -1,12 +1,13 @@
 // import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'dart:developer' as developer;
 
 // Helpers for Apple Sign In
 import 'dart:convert';
 import 'dart:math';
 import 'package:crypto/crypto.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+// import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 // Firebase exposes the user's authentication state as a stream
 class AuthService {
@@ -21,7 +22,7 @@ class AuthService {
     try {
       await FirebaseAuth.instance.signInAnonymously();
     } on FirebaseAuthException catch (e) {
-      print(e);
+      developer.log('Error: $e.message');
     }
   }
 
@@ -41,7 +42,7 @@ class AuthService {
       // Use the credentials to sign into Firebase
       await FirebaseAuth.instance.signInWithCredential(authCredential);
     } on FirebaseAuthException catch (e) {
-      print(e);
+      developer.log('Error: $e.message');
     }
   }
 
