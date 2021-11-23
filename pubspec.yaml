@@ -2,7 +2,7 @@ name: quizapp
 description: A new Flutter project.
 publish_to: 'none'
 
-version: 1.0.6
+version: 1.0.7
 
 # Synced with dependencies from Fireship tutorial
 
@@ -39,7 +39,7 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - assets/
-  #   - assets/covers/
-  #   - assets/congrats.gif
+  assets:
+    - assets/
+    - assets/covers/
+    - assets/congrats.gif
