@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:quizapp/services/models.dart';
+import 'package:quizapp/topics/drawer.dart';
 
 class TopicItem extends StatelessWidget {
   final Topic topic;
@@ -38,9 +39,14 @@ class TopicItem extends StatelessWidget {
               ),
               Flexible(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  padding: const EdgeInsets.only(
+                    left: 10,
+                    right: 10,
+                    bottom: 5,
+                  ),
                   child: Text(
                     topic.title,
+                    textAlign: TextAlign.center,
                     style: const TextStyle(
                       height: 1.5,
                       fontWeight: FontWeight.bold,
@@ -73,19 +79,23 @@ class TopicScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
       ),
       // Contains the image and title directly underneath
-      body: ListView(children: [
-        Hero(
-          tag: topic.img,
-          // Useful media query to size the image as full-width
-          child: Image.asset('assets/covers/${topic.img}',
-              width: MediaQuery.of(context).size.width),
-        ),
-        Text(
-          topic.title,
-          style: const TextStyle(
-              height: 2, fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-      ]),
+      body: ListView(
+        children: [
+          Hero(
+            tag: topic.img,
+            // Useful media query to size the image as full-width
+            child: Image.asset('assets/covers/${topic.img}',
+                width: MediaQuery.of(context).size.width),
+          ),
+          Text(
+            topic.title,
+            style: const TextStyle(
+                height: 2, fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          // List of Quizzes (reused widget)
+          QuizList(topic: topic),
+        ],
+      ),
     );
   }
 }

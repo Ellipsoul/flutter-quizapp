@@ -5,6 +5,8 @@ import 'package:quizapp/shared/shared.dart';
 import 'package:quizapp/services/models.dart';
 import 'package:quizapp/topics/topic_item.dart';
 
+import 'drawer.dart';
+
 class TopicsScreen extends StatelessWidget {
   const TopicsScreen({Key? key}) : super(key: key);
 
@@ -28,6 +30,8 @@ class TopicsScreen extends StatelessWidget {
               backgroundColor: Colors.deepPurple,
               title: const Text('Topics'),
             ),
+            // Custom dynamic drawer
+            drawer: TopicDrawer(topics: topics),
             // Gridview,count puts a fixed number of items on the x axis
             body: GridView.count(
               primary: false,
