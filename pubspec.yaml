@@ -2,7 +2,7 @@ name: quizapp
 description: A new Flutter project.
 publish_to: 'none'
 
-version: 1.0.7
+version: 1.0.8
 
 # Synced with dependencies from Fireship tutorial
 
@@ -22,7 +22,7 @@ dependencies:
   crypto: 3.0.1
   font_awesome_flutter: 9.2.0
   google_fonts: 2.1.0
-  # provider: 6.0.1
+  provider: 6.0.1
   rxdart: 0.27.2
   json_annotation: 4.3.0
 

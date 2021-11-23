@@ -1,8 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
-
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+
 import 'package:quizapp/routes.dart';
 import 'package:quizapp/theme.dart';
+import 'package:quizapp/services/services.dart';
 
 // This is called to run the application
 void main() {
@@ -44,10 +46,17 @@ class _AppState extends State<App> {
 
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
-          // Once routes are added here, don't add anything else to this main file
-          return MaterialApp(
-            routes: appRoutes, // Import the routes into the base app
-            theme: appTheme,
+          // Wrap root widget in a StreamProvider
+          return StreamProvider(
+            // Function to return the desired stream
+            // Current value of Firestore report document available everywhere
+            create: (_) => FirestoreService().streamReport(),
+            // Initial data (here it's an empty report)
+            initialData: Report(),
+            child: MaterialApp(
+              routes: appRoutes, // Import the routes into the base app
+              theme: appTheme,
+            ),
           );
         }
 
