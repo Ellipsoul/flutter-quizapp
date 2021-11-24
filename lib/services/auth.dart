@@ -28,8 +28,6 @@ class AuthService {
 
   // Handle Google authentication
   Future<void> googleLogin() async {
-    await FirebaseAuth.instance.signOut();
-
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
       if (googleUser == null) return;
@@ -44,8 +42,14 @@ class AuthService {
       );
       // Use the credentials to sign into Firebase
       await FirebaseAuth.instance.signInWithCredential(authCredential);
-    } on FirebaseAuthException catch (e) {
-      developer.log('Error: $e.message');
+    } on Exception catch (e) {
+      developer.log('Error: $e.message. Attempting Google Sign In on Web');
+
+      GoogleAuthProvider googleAuthProvider = GoogleAuthProvider();
+      googleAuthProvider
+          .setCustomParameters({'login_hint': 'user@example.com'});
+
+      await FirebaseAuth.instance.signInWithPopup(googleAuthProvider);
     }
   }
 

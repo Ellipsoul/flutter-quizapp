@@ -54,6 +54,7 @@ class _AppState extends State<App> {
             // Initial data (here it's an empty report)
             initialData: Report(),
             child: MaterialApp(
+              title: 'Flutter Quiz App',
               routes: appRoutes, // Import the routes into the base app
               theme: appTheme,
             ),
