@@ -8,6 +8,8 @@ class QuizState with ChangeNotifier {
   // Private variables to represent the state
   double _progress = 0;
   Option? _selected;
+  // Controls when to move to the next page
+  final PageController controller = PageController();
 
   // Getters and setters
   double get progress => _progress;
@@ -21,5 +23,13 @@ class QuizState with ChangeNotifier {
   set selected(Option? newOption) {
     _selected = newOption;
     notifyListeners();
+  }
+
+  // Define a useful nextPage method
+  void nextPage() async {
+    await controller.nextPage(
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeOut,
+    );
   }
 }
