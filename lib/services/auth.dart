@@ -4,9 +4,9 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'dart:developer' as developer;
 
 // Helpers for Apple Sign In
-import 'dart:convert';
-import 'dart:math';
-import 'package:crypto/crypto.dart';
+// import 'dart:convert';
+// import 'dart:math';
+// import 'package:crypto/crypto.dart';
 // import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 // Firebase exposes the user's authentication state as a stream
@@ -28,16 +28,19 @@ class AuthService {
 
   // Handle Google authentication
   Future<void> googleLogin() async {
+    await FirebaseAuth.instance.signOut();
+
     try {
-      final googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
       if (googleUser == null) return;
 
       // Wait for the user to sign in natively
-      final googleAuth = await googleUser.authentication;
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser.authentication;
       // Retrieve credentials from successful login
       final authCredential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
       );
       // Use the credentials to sign into Firebase
       await FirebaseAuth.instance.signInWithCredential(authCredential);
@@ -46,22 +49,27 @@ class AuthService {
     }
   }
 
-  // Generate arbitrary one time use number (nonce)
-  String generateNonce([int length = 32]) {
-    const charset =
-        '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
-    final random = Random.secure();
-    // Seems to be generating a 32-length random string
-    return List.generate(length, (_) => charset[random.nextInt(charset.length)])
-        .join();
+  // Sign out (of any provider)
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
   }
 
-  // Returns the sha256 hash of [input] in hex notation.
-  String sha256ofString(String input) {
-    final bytes = utf8.encode(input);
-    final digest = sha256.convert(bytes);
-    return digest.toString();
-  }
+  // // Generate arbitrary one time use number (nonce)
+  // String generateNonce([int length = 32]) {
+  //   const charset =
+  //       '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
+  //   final random = Random.secure();
+  //   // Seems to be generating a 32-length random string
+  //   return List.generate(length, (_) => charset[random.nextInt(charset.length)])
+  //       .join();
+  // }
+
+  // // Returns the sha256 hash of [input] in hex notation.
+  // String sha256ofString(String input) {
+  //   final bytes = utf8.encode(input);
+  //   final digest = sha256.convert(bytes);
+  //   return digest.toString();
+  // }
 
   // // Handle Apple authenticaion (not in use)
   // Future<UserCredential> signInWithApple() async {
@@ -92,8 +100,4 @@ class AuthService {
   //   return await FirebaseAuth.instance.signInWithCredential(oauthCredential);
   // }
 
-  // Sign out (of any provider)
-  Future<void> signOut() async {
-    await FirebaseAuth.instance.signOut();
-  }
 }
