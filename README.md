@@ -22,6 +22,7 @@ A new Flutter project.
   - https://firebase.flutter.dev/docs/auth/social
   - Just put it below the native authentication and catch the error
 - Deploy by following this https://medium.com/flutter/must-try-use-firebase-to-host-your-flutter-app-on-the-web-852ee533a469
+  - Follow instructions, but probably still do a `flutter build web` before `firebase deploy` just to be safe
   - Check out the 'hosting' section on Firebase console
 - Mention that Apple Sign In is just bugged
 

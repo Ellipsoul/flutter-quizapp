@@ -1,8 +1,8 @@
 name: quizapp
-description: A new Flutter project.
+description: A simple quiz app made with Flutter
 publish_to: 'none'
 
-version: 1.2.0
+version: 2.0.1
 
 # Synced with dependencies from Fireship tutorial
 
