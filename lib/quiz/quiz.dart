@@ -158,6 +158,112 @@ class QuestionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    var state = Provider.of<QuizState>(context);
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        // Question text
+        Expanded(
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            alignment: Alignment.center,
+            child: Text(question.text),
+          ),
+        ),
+        // Container with list of options
+        Container(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: question.options.map((option) {
+              return Container(
+                height: 90,
+                margin: const EdgeInsets.only(bottom: 10),
+                color: Colors.black26,
+                child: InkWell(
+                  // Update selected option when one is tapped
+                  onTap: () {
+                    state.selected = option;
+                    // Open the bottom sheet
+                    _bottomSheet(context, option, state);
+                  },
+                  // Contains an icon and the option value
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    child: Row(
+                      children: [
+                        Icon(
+                            state.selected == option
+                                ? FontAwesomeIcons.checkCircle
+                                : FontAwesomeIcons.circle,
+                            size: 30),
+                        Expanded(
+                          child: Container(
+                            margin: const EdgeInsets.only(left: 16),
+                            child: Text(
+                              option.value,
+                              style: Theme.of(context).textTheme.bodyText2,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+        )
+      ],
+    );
+  }
+
+  // Bottom sheet shown when Question is answered
+  _bottomSheet(BuildContext context, Option option, QuizState state) {
+    bool correct = option.correct;
+
+    // Magic global method that opens a bottom sheet
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 250,
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              // Question correctness and explanation of right/wrong answer
+              Text(correct ? 'Good Job!' : 'Wrong'),
+              Text(
+                option.detail,
+                style: const TextStyle(fontSize: 18, color: Colors.white54),
+              ),
+              // Continue or try again depending on correctness
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    primary: correct ? Colors.green : Colors.red),
+                child: Text(
+                  correct ? 'Onward!' : 'Try Again',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    letterSpacing: 1.5,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                // Navigate based on whether the question was correct
+                onPressed: () {
+                  if (correct) {
+                    state.nextPage();
+                  }
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }
