@@ -15,6 +15,7 @@ A new Flutter project.
   - Go to Firebase/Google Cloud and grab the OAuth Client ID
   - When running on web, do `flutter run -d chrome --web-port=5000`
   - The localhost port 5000 uri is specifically listed as an allowed domain on Google Cloud
+- CORS is going to prevent a the user display photo from loading! Avoid and use a static image or do something risky and disable some security rules (not sure if it'll even work on production)
 
 
 ## Getting Started

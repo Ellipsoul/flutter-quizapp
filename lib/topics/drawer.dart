@@ -26,7 +26,7 @@ class TopicDrawer extends StatelessWidget {
             children: [
               // Title of topic
               Padding(
-                padding: const EdgeInsets.only(top: 10, left: 10),
+                padding: const EdgeInsets.only(top: 5, left: 20),
                 child: Text(
                   topic.title,
                   style: const TextStyle(

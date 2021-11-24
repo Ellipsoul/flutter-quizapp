@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:quizapp/services/models.dart';
+import 'package:quizapp/shared/shared.dart';
 import 'package:quizapp/topics/drawer.dart';
 
 class TopicItem extends StatelessWidget {
@@ -42,13 +43,12 @@ class TopicItem extends StatelessWidget {
                   padding: const EdgeInsets.only(
                     left: 10,
                     right: 10,
-                    bottom: 5,
                   ),
                   child: Text(
                     topic.title,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
-                      height: 1.5,
+                      height: 2,
                       fontWeight: FontWeight.bold,
                     ),
                     // Graceful text overflow
@@ -57,7 +57,8 @@ class TopicItem extends StatelessWidget {
                   ),
                 ),
               ),
-              // Flexible(child: TopicProgress(topic: topic)),
+              // Progress of topic below name
+              Flexible(child: TopicProgress(topic: topic)),
             ],
           ),
         ),
@@ -90,7 +91,11 @@ class TopicScreen extends StatelessWidget {
           Text(
             topic.title,
             style: const TextStyle(
-                height: 2, fontSize: 20, fontWeight: FontWeight.bold),
+              height: 2,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
           ),
           // List of Quizzes (reused widget)
           QuizList(topic: topic),
