@@ -19,13 +19,6 @@ class BottomNavBar extends StatelessWidget {
         ),
         BottomNavigationBarItem(
           icon: Icon(
-            FontAwesomeIcons.bolt,
-            size: 20,
-          ),
-          label: 'About',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
             FontAwesomeIcons.userCircle,
             size: 20,
           ),
@@ -40,9 +33,6 @@ class BottomNavBar extends StatelessWidget {
           case 0:
             break; // Do nothing, we're already on topics
           case 1:
-            Navigator.pushNamed(context, '/about');
-            break;
-          case 2:
             Navigator.pushNamed(context, '/profile');
             break;
         }

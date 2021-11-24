@@ -1,4 +1,3 @@
-import 'package:quizapp/about/about.dart';
 import 'package:quizapp/profile/profile.dart';
 import 'package:quizapp/login/login.dart';
 import 'package:quizapp/topics/topics.dart';
@@ -10,5 +9,4 @@ var appRoutes = {
   '/login': (context) => const LoginScreen(),
   '/topics': (context) => const TopicsScreen(),
   '/profile': (context) => const ProfileScreen(),
-  '/about': (context) => const AboutScreen(),
 };
