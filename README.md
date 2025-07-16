@@ -2,7 +2,7 @@
 
 ### App Demo (Web)
 
-Deployed with Firebase Hosting [here](https://flutter-quizapp-5e713.web.app) and [here](https://flutter-quizapp-5e713.firebaseapp.com)
+Deployed with Firebase Hosting [here](https://memorygame.aronteh.com/)
 
 ### App Description
 
